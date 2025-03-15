@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>别踩我！</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>别踩我！- 乌龟逃生记</h1>
+        <div class="canvas-container">
+            <div class="game-intro" id="gameIntro">
+                <img src="images/fm.png" alt="游戏封面" class="cover-image">
+                <button id="startButton" class="start-button">开始游戏</button>
+            </div>
+            <div class="canvas-background" id="gameCanvasContainer" style="display: none;">
+                <img src="images/background.png" alt="游戏背景" class="game-background">
+                <canvas id="gameCanvas" width="800" height="400"></canvas>
+            </div>
+        </div>
+        <div class="controls">
+            <p>使用 ← 和 → 方向键控制乌龟左右移动，躲避马里奥的踩踏！</p>
+            <div class="score-container">
+                <p>得分: <span id="score">0</span></p>
+                <p>最高分: <span id="highScore">0</span></p>
+            </div>
+            <button id="aboutButton" class="about-button">关于游戏</button>
+        </div>
+    </div>
+    
+    <!-- 作者信息弹窗 -->
+    <div id="authorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>游戏作者信息</h2>
+            <div class="author-info">
+                <p><strong>游戏说明：</strong>灵感来自于超级马里奥游戏，游戏里的小乌龟出门找蘑菇吃，遇到了马里奥，马里奥老是想踩小乌龟，小乌龟说“别踩我！”，它要躲开马里奥吃到蘑菇。每吃到一个蘑菇，得10分。</p>
+                <p><strong>创意：</strong>侯天与</p>
+                <p><strong>美术：</strong>侯天与</p>
+                <p><strong>代码：</strong>AI-deepseek</p>
+                <p><strong>学校：</strong>浐灞一小创新小学一年级15班</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html> 

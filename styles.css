@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #87CEEB; /* 天空蓝色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    max-width: 840px; /* 从850px减少到840px，使其更贴合Canvas宽度 */
+    width: 100%;
+}
+
+h1 {
+    color: #E52521; /* 马里奥红 */
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.canvas-container {
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: 800px; /* 设置固定宽度与Canvas相同 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-intro {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 添加overflow:hidden防止内容溢出 */
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.start-button {
+    position: absolute;
+    bottom: 50px;
+    background-color: #E52521; /* 马里奥红 */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 10;
+}
+
+.start-button:hover {
+    background-color: #C41E3A;
+    transform: scale(1.05);
+}
+
+.restart-button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #E52521; /* 马里奥红 */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 10;
+}
+
+.restart-button:hover {
+    background-color: #C41E3A;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.canvas-background {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden; /* 添加overflow:hidden防止内容溢出 */
+}
+
+.game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover; /* 确保图片覆盖整个容器 */
+}
+
+canvas {
+    display: block;
+    background-color: transparent; /* 改为透明背景 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 800px; /* 确保宽度为800px */
+    height: 400px; /* 确保高度为400px */
+}
+
+.controls {
+    margin-top: 15px;
+}
+
+.controls p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+button {
+    background-color: #E52521; /* 马里奥红 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+}
+
+button:hover {
+    background-color: #C41E3A;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.score-container p {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 关于按钮 */
+.about-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.about-button:hover {
+    background-color: #45a049;
+}
+
+/* 弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.author-info {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.author-info p {
+    margin: 10px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 840px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .canvas-container,
+    .game-intro,
+    .canvas-background,
+    canvas,
+    .game-background {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 2/1; /* 保持2:1的宽高比 */
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+} 
