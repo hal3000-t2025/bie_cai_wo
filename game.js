@@ -167,7 +167,24 @@ function startGame() {
         lastFrameTime = 0; // 重置帧时间
         requestAnimationFrame(gameLoop);
     } else {
+        // 移除所有"重新开始"按钮
+        const restartButtons = document.getElementsByClassName('restart-button');
+        while (restartButtons.length > 0) {
+            if (restartButtons[0].parentNode) {
+                restartButtons[0].parentNode.removeChild(restartButtons[0]);
+            }
+        }
+        
+        // 完全清除画布上的所有内容
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 重置游戏状态
         init();
+        gameRunning = true;
+        lastFrameTime = 0;
+        
+        // 确保游戏循环重新开始
+        requestAnimationFrame(gameLoop);
     }
 }
 
@@ -390,10 +407,28 @@ function gameOver() {
     ctx.fillText(`得分: ${score}`, canvas.width / 2, canvas.height / 2);
     ctx.fillText(`最高分: ${highScore}`, canvas.width / 2, canvas.height / 2 + 40);
     
-    // 在游戏结束后，将开始按钮移动到游戏画布中央
-    startButton.textContent = '重新开始';
-    startButton.className = 'restart-button';
-    gameCanvasContainer.appendChild(startButton);
+    // 移除所有现有的"重新开始"按钮
+    const existingButtons = document.getElementsByClassName('restart-button');
+    while (existingButtons.length > 0) {
+        if (existingButtons[0].parentNode) {
+            existingButtons[0].parentNode.removeChild(existingButtons[0]);
+        }
+    }
+    
+    // 创建一个新的"重新开始"按钮
+    const restartButton = document.createElement('button');
+    restartButton.textContent = '重新开始';
+    restartButton.className = 'restart-button';
+    restartButton.addEventListener('click', function() {
+        // 点击按钮时立即移除自身
+        if (restartButton.parentNode) {
+            restartButton.parentNode.removeChild(restartButton);
+        }
+        startGame();
+    });
+    
+    // 添加到游戏画布容器中
+    gameCanvasContainer.appendChild(restartButton);
 }
 
 // 图像加载完成后开始游戏
